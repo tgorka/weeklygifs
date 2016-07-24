@@ -16,7 +16,9 @@ Call Giphy page, take 5 random animations and send them as an email to selected 
 Install script on your webtask account. 
 Take care about your email account credentials.
 ```
-wt create https://raw.githubusercontent.com/tgorka/weeklygifs/master/weeklygifs.js --name weeklygifs --secret auth=MAIL_SMTPS_CREDENTIAL
+wt create https://raw.githubusercontent.com/tgorka/weeklygifs/master/weeklygifs.js \ 
+          --name weeklygifs \ 
+          --secret auth=MAIL_SMTPS_CREDENTIAL
 ```
 
 This exmaple is for a gmail account. the MAIL_SMTPS_CREDENTIAL will looks like
@@ -34,6 +36,29 @@ After adding parameter of receiver list we will have service that will send pack
 https://webtask.it.auth0.com/api/run/wt-YOUR_ACCOUNT-0/weeklygifs?webtask_no_cache=1&receivers=EMAIL1,EMAIL2
 ```
 
+To see logs
+```
+wt logs
+```
+
+And finally to schedule the service to be run every week (Monday at 12.30) we should schedule it
+```
+wt cron schedule --name weeklygifs \
+                 --secret auth=MAIL_SMTPS_CREDENTIAL \
+                 --secret receivers=EMAIL1,EMAIL2 \
+                 "30 12 * * 1" \
+                 https://raw.githubusercontent.com/tgorka/weeklygifs/master/weeklygifs.js
+```
+
+At the end to see the croon history
+```
+wt cron history weeklygifs
+```
+
+To see all croon tasks
+```
+wt cron ls
+```
 
 ## Release History
 + 1.0.0 - initial final version of the application
