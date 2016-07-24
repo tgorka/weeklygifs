@@ -13,9 +13,15 @@ Call Giphy page, take 5 random animations and send them as an email to selected 
 ## Installation
 
 ### Webtask
-Install script on your webtask account.
+Install script on your webtask account. 
+Take care about your email account credentials.
 ```
-wt create weeklygifs.js 
+wt create https://raw.githubusercontent.com/tgorka/weeklygifs/master/weeklygifs.js --name weeklygifs --secret auth=MAIL_SMTPS_CREDENTIAL
+```
+
+This exmaple is for a gmail account. the MAIL_SMTPS_CREDENTIAL will looks like
+```
+smtps://GMAIL_USER_NAME%40gmail.com:GMAIL_PASSWORD@smtp.gmail.com
 ```
 
 ## Release History
